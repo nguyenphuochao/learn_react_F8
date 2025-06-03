@@ -8,3 +8,16 @@ const sum2 = (a, b) => ({ a: a, b: b });
 Arrow function không hỗ trợ cho contructor
 Arrow function không hỗ trợ cho context trong object -> undefined
 */
+
+// Enhanced object literals
+var name = 'Javascript';
+var price = 1000;
+
+var course = {
+    name,
+    price,
+    getName() {
+        return name
+    }
+};
+
