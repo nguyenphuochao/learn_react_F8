@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React DOM</title>
+    <script crossorigin src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+
+</head>
+
+<!---
+        1. React.createElement() -> React Element
+        2. So sánh với document.createElement() -> DOM element
+        3. Thay đổi : id, className, style, ...
+        4. Thêm: text, HTML
+        5. Tạo: 
+           <h1 title="Hello" class="heading">Hello guys!</h1>
+        6. Tạo:
+            <ul>
+                <li>Javascript</li>
+                <li>React</li>
+            </ul>
+        7. Tạo:
+            <div class="post-item">
+                <h2 title="Học React tại F8">Học ReactJs</h2>
+                <p>Học ReactJs từ cơ bản đến nâng cao</p>
+            </div>
+--->
+
+<body>
+
+    <!-- Render UI ở đây -->
+    <div id="root"></div>
+
+    <script>
+        /* Bài 5 */
+
+        // DOM
+        var h1DOM = document.createElement('h1');
+        h1DOM.title = 'Hello';
+        h1DOM.className = 'Heading';
+        h1DOM.innerText = 'Hello Guys';
+        document.body.appendChild(h1DOM);
+
+        // React -> React-DOM
+        // React.createElement(type, props, children, n)
+        var h1React = React.createElement('h1', {
+            title: 'Hello',
+            className: 'heading'
+        });
+
+        /* Bài 6 */
+
+        // DOM
+        var ulDOM = document.createElement('ul');
+
+        var liDOM1 = document.createElement('li');
+        liDOM1.innerText = 'Javascript';
+
+        var liDOM2 = document.createElement('li');
+        liDOM2.innerText = 'React';
+
+        ulDOM.appendChild(liDOM1);
+        ulDOM.appendChild(liDOM2);
+
+        document.body.appendChild(ulDOM);
+
+        // React
+        var ulReact = React.createElement(
+            'ul',
+            null,
+            React.createElement('li', null, 'Javascript'),
+            React.createElement('li', null, 'React')
+        )
+
+        /* Bài 7 */
+
+        // DOM
+        const divDOM = document.createElement('div');
+        divDOM.className = 'post-item';
+
+        const h2DOM = document.createElement('h2');
+        h2DOM.title = 'Học React tại F8';
+        h2DOM.innerText = 'Học ReactJs';
+
+        const pDOM = document.createElement('p');
+        pDOM.innerText = 'Học ReactJs từ cơ bản đến nâng cao';
+
+        divDOM.appendChild(h2DOM);
+        divDOM.appendChild(pDOM);
+
+        document.body.appendChild(divDOM);
+
+        // React
+        const divReact = React.createElement(
+            'div',
+            {
+                className: 'post-item'
+            },
+            React.createElement('h2', { title: 'Học React tại F8' }, 'Học ReactJs'),
+            React.createElement('p', null, 'Học ReactJs từ cơ bản đến nâng cao')
+        )
+
+        // Get root Element
+        const container = document.getElementById('root');
+
+        // React@17
+        // React-DOM -> render UI
+        // ReactDOM.render(divReact, root);
+
+        // React@18
+        const root = ReactDOM.createRoot(container);
+        root.render(divReact);
+
+    </script>
+</body>
+
+</html>
