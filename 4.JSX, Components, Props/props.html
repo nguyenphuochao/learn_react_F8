@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Props</title>
+  <script crossorigin src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+  <!--
+        Props
+
+        - React elements
+          - Sử dụng props giống như với attributes của thẻ HTML
+          - 2 props class, for => className, htmlFor
+          - Phải tuân theo qui ước có sẵn
+        - React Components
+          - Sử dụng props giống như đối số cho Component
+          - Tự do đặt tên props
+            - Đặt theo camelCase
+            - Có thể bao gồm dấu gạch ngang
+        - Chú ý :
+          - Prop "key" là prop đặc biệt
+          - Props cơ bản là đối số của Component
+            => Props có thể là bất kì kiểu dữ liệu gì
+          - Sử dụng destructuring
+    -->
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    // PostItem.js
+    function PostItem({ title, image, description, publishedAt }) {
+      return (
+        <div className="post-item">
+          <img src={image} alt={title} />
+          <h2 className="post-title">{title}</h2>
+          <p className="post-desc">{description}</p>
+          <p className="post-published">{publishedAt}</p>
+        </div>
+      )
+    }
+
+    // App.js
+    function App() {
+      return (
+        <div className="wrapper">
+          <PostItem
+            title="Post title 1"
+            image="https://files.fullstack.edu.vn/f8-prod/blog_posts/6936/6422afa5a62f8.jpg"
+            description="Post description 1"
+            publishedAt="Một ngày trước . 5 phút đọc"
+          />
+
+          <PostItem
+            title="Post title 2"
+            image="https://files.fullstack.edu.vn/f8-prod/blog_posts/6936/6422afa5a62f8.jpg"
+            description="Post description 2"
+            publishedAt="Một ngày trước . 10 phút đọc"
+          />
+
+        </div>
+      )
+    }
+
+    // index.js
+    ReactDOM.render(<App />, document.getElementById('root'));
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react-element-types-exercise</title>
+    <script crossorigin src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        // PostItem
+        function PostItem() {
+            return (
+                <div className="post-item">
+                    <img src="https://files.fullstack.edu.vn/f8-prod/blog_posts/6936/6422afa5a62f8.jpg" alt="blog_posts" />
+                    <h2 className="post-title">Post title</h2>
+                    <p className="post-desc">Post description</p>
+                    <p className="post-published">Một ngày trước . 5 phút đọc</p>
+                </div>
+            )
+        }
+
+        const app = (
+            <div className="post-list">
+                <PostItem />
+                <PostItem />
+                <PostItem />
+            </div>
+        )
+
+        ReactDOM.render(app, document.getElementById('app'));
+
+    </script>
+</body>
+
+</html>
