@@ -1,0 +1,12 @@
+NPM, NPX và YARN là gì?
+
+- NPM 
+   - Project scope
+   - Global scope
+- NPX 
+   - Tại sao dùng NPX
+   - Gặp lỗi : npx create-react-app tiktok
+- YARN & NPM
+- YARN install
+- Lưu ý:
+   - Luôn bật development server (npm start || yarn start)

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Children Props Render Props</title>
+    <script crossorigin src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <!--
+
+        // Phần 2.
+        - Props trong JSX
+          - <YourComponent
+              propName1="String literals"
+              propsName2={expression}
+            />
+          - Props default to "true"
+          - Spread/Rest props
+          - Children prop
+             - <YourComponent>String literals</YourComponent>
+             - <YourComponent>{expression}</YourComponent>
+          - Render props
+
+    -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // Children prop
+        function Button({ children }) {
+            return (
+                <button>{children}</button>
+            )
+        }
+
+        function App() {
+            return (
+                <div className="wrapper">
+                    <Button>Click me</Button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+
+    </script>
+</body>
+
+</html>

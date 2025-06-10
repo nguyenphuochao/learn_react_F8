@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components naming convention</title>
+    <script crossorigin src="https://unpkg.com/react@18.0.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <!--
+        Làm việc với JSX
+
+        // Phần 1.
+        - Xử lí DOM event
+        - Component do chúng ta định nghĩa phải viết
+          in hoa kí tự đầu
+            - Chọn component trong 1 object
+        - Booleans, Null & Undefined không được render
+        - Kết hợp toán tử logic để render theo điều kiện
+        
+    -->
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        // Sử dung From object
+        const Form = {
+            Input() {
+                return <input />
+            },
+            Checkbox() {
+                return <input type="checkbox" />
+            }
+        }
+
+        // Button
+        function Button({ title, href, onClick }) {
+            let Component = 'button'
+            const props = {}
+
+            if (href) {
+                Component = 'a'
+                props.href = href
+            }
+            if (onClick) {
+                props.onClick = onClick
+            }
+
+            return <Component {...props}>{title}</Component>
+        }
+
+        function App() {
+            return (
+                <div className="wrapper">
+                    <Button
+                        title="Click me!"
+                        href="https://fullstack.edu.vn"
+                        onClick={() => console.log(Math.random())}
+                    />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+
+</body>
+
+</html>
