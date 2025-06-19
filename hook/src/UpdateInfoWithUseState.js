@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function UpdateInfo() {
+function UpdateInfoWithUseState() {
     const [info, setInfo] = useState({
         name: "HaoNP",
         age: 25,
@@ -22,4 +22,4 @@ function UpdateInfo() {
     )
 }
 
-export default UpdateInfo;
+export default UpdateInfoWithUseState;
