@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Product from './components/Product';
+import { useState } from 'react';
+import Cart from './components/Cart';
 
 
 function App() {
@@ -65,6 +67,21 @@ function App() {
         }
     ];
 
+    let cart = [];
+
+    if(localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+    }
+
+    const handleAddToCart = (index) => {
+        if(cart[index] == fakeData[index]) {
+            alert('Sản phẩm ' + cart[index].name + ' đã tồn tại')
+            return
+        }
+        cart.push(fakeData[index]);
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
     return (
         <>
             <Header />
@@ -73,9 +90,9 @@ function App() {
                 <div className="row">
 
                     {
-                        fakeData.map(item =>
+                        fakeData.map((item, index) =>
                             <div key={item.id} className="col-md-3 mt-4">
-                                <Product item={item} />
+                                <Product item={item} index={index} handleAddToCart={handleAddToCart} />
                             </div>
                         )
                     }

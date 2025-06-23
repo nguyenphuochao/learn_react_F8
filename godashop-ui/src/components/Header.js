@@ -44,7 +44,7 @@ function Header() {
             </Navbar>
 
             {/* CartModal */}
-            <Cart show={modalCart} handleClose={handleClose} />
+            <Cart show={modalCart} handleClose={handleClose} items={[]} />
         </>
     )
 }
