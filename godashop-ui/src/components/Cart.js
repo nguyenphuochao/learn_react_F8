@@ -10,9 +10,14 @@ function Cart({ show, handleClose }) {
 
     const cart =  JSON.parse(localStorage.getItem("cart")) ?? [];
 
+    let cartTotal = 0;
+    for (let i = 0; i < cart.length; i++) {
+        cartTotal += cart[i].qty
+    }
+
     useEffect(() => {
         
-    }, [cart.length]);
+    }, [cartTotal]);
 
     return (
         <Modal show={show} onHide={handleClose} animation={true}>
