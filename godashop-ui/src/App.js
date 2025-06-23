@@ -73,12 +73,22 @@ function App() {
         cart = JSON.parse(localStorage.getItem("cart"));
     }
 
-    const handleAddToCart = (index) => {
-        if(cart[index] == fakeData[index]) {
-            alert('Sản phẩm ' + cart[index].name + ' đã tồn tại')
-            return
-        }
-        cart.push(fakeData[index]);
+    const handleAddToCart = (id) => {
+       for (let index = 0; index < cart.length; index++) {
+            if(cart[index].id === id) {
+                alert(`Sản phảm ${cart[index].name} đã tồn tại`)
+                return
+            }
+       }
+
+       const index = fakeData.findIndex(item => item.id === id);
+
+        const object = {
+           ...fakeData[index],
+           qty : 1
+        };
+
+        cart.push(object);
         localStorage.setItem("cart", JSON.stringify(cart));
     }
 
@@ -90,9 +100,9 @@ function App() {
                 <div className="row">
 
                     {
-                        fakeData.map((item, index) =>
+                        fakeData.map(item =>
                             <div key={item.id} className="col-md-3 mt-4">
-                                <Product item={item} index={index} handleAddToCart={handleAddToCart} />
+                                <Product item={item} handleAddToCart={handleAddToCart} />
                             </div>
                         )
                     }

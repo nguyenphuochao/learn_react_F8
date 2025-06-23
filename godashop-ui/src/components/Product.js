@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function Product({ item, index, handleAddToCart }) {
+function Product({ item, handleAddToCart }) {
     return (
         <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={item.image} />
@@ -12,7 +12,7 @@ function Product({ item, index, handleAddToCart }) {
                 <Card.Text>
                    {item.desc}
                 </Card.Text>
-                <Button variant="primary" onClick={() =>handleAddToCart(index)}>Add to cart</Button>
+                <Button variant="primary" onClick={() =>handleAddToCart(item.id)}>Add to cart</Button>
             </Card.Body>
         </Card>
     )

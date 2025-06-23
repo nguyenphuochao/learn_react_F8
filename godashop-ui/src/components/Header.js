@@ -13,7 +13,11 @@ function Header() {
 
     return (
         <>
-            <Navbar expand="lg" className="bg-body-tertiary">
+            <Navbar expand="lg" className="bg-body-tertiary" style={{
+                position: 'sticky',
+                top: 0,
+                zIndex: 999
+            }}>
                 <Container>
                     <Navbar.Brand href="#">Godashop</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
@@ -28,6 +32,7 @@ function Header() {
                             <Nav.Link href="#action3">Contact</Nav.Link>
                         </Nav>
                         <Nav className="me-2">
+                            <Nav.Link href="#" className="text-danger fs-5 fw-bold">10</Nav.Link>
                             <Button onClick={() => handleShow(true)}>Cart</Button>
                         </Nav>
                         <Form className="d-flex">

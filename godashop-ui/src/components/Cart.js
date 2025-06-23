@@ -1,5 +1,4 @@
 import React from 'react'
-import { use } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -8,16 +7,26 @@ import Table from 'react-bootstrap/Table';
 
 function Cart({ show, handleClose }) {
 
-    const cart =  JSON.parse(localStorage.getItem("cart")) ?? [];
+    const cart = JSON.parse(localStorage.getItem("cart")) ?? [];
+    const [total, setTotal] = useState(totalCart);
 
-    let cartTotal = 0;
-    for (let i = 0; i < cart.length; i++) {
-        cartTotal += cart[i].qty
+    function totalCart() {
+        let total = 0;
+        for (let i = 0; i < cart.length; i++) {
+            total += cart[i].qty
+        }
+        return total
     }
 
-    useEffect(() => {
-        
-    }, [cartTotal]);
+    console.log(total);
+
+    const handleDeleteCart = (id) => {
+        const index = cart.findIndex(item => item.id === id);
+        const newCart = cart;
+        newCart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(newCart));
+        setTotal(totalCart());
+    }
 
     return (
         <Modal show={show} onHide={handleClose} animation={true}>
@@ -45,10 +54,14 @@ function Cart({ show, handleClose }) {
                                     <td>{index + 1}</td>
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
-                                    <td>{item.qty}</td>
+                                    <td>
+                                        <input type="number" className='w-50' value={item.qty} />
+                                    </td>
                                     <td>{item.price}</td>
-                                    <td>{item.price}</td>
-                                    <td>{item.price}</td>
+                                    <td>{Number(item.price) * Number(item.qty)}</td>
+                                    <td>
+                                        <Button variant="danger btn-sm" onClick={() => handleDeleteCart(item.id)}>Delete</Button>
+                                    </td>
                                 </tr>
                             )
                         }
@@ -62,7 +75,7 @@ function Cart({ show, handleClose }) {
                     Close
                 </Button>
                 <Button variant="primary" onClick={handleClose}>
-                    Save Changes
+                    Checkout
                 </Button>
             </Modal.Footer>
         </Modal>
