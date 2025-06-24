@@ -67,6 +67,7 @@ const fakeData = [
 function App() {
 
     const [totalCart, setTotalCart] = useState(0);
+    const [qty, setQty] = useState(1);
 
     let cart = [];
 
@@ -103,12 +104,13 @@ function App() {
     }
 
     const handleChangeQty = (e, id) => {
-        const newQty = e.target.value;
+        const newQty = Number(e.target.value);
         const updateQty = cart.map(item =>
             item.id === id ? { ...item, qty: newQty } : item
         );
         localStorage.setItem("cart", JSON.stringify(updateQty));
-        cartTotal();
+        e.target.value = newQty;
+        setQty(newQty);
     }
 
     // Hàm tính tổng số lượng giỏ hàng
@@ -122,10 +124,9 @@ function App() {
     }
 
     useEffect(() => {
-
         cartTotal();
         // eslint-disable-next-line
-    }, [])
+    }, [qty])
 
     return (
         <>

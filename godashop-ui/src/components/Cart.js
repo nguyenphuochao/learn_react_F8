@@ -35,7 +35,7 @@ function Cart({ show, handleClose, handleDeleteCart, handleChangeQty }) {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>
-                                        <input type="number" className='w-50' value={item.qty} onChange={(e) => handleChangeQty(e, item.id)} />
+                                        <input type="number" className='w-50' defaultValue={item.qty} min={1} onChange={(e) => handleChangeQty(e, item.id)} />
                                     </td>
                                     <td>{item.price}</td>
                                     <td>{convertMoney(Number(item.price) * Number(item.qty))}</td>
