@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Cart from './Cart';
 
-function Header() {
+function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
     const [modalCart, setModalCart] = React.useState(false);
     const handleClose = () => setModalCart(false);
     const handleShow = () => setModalCart(true);
@@ -32,7 +32,7 @@ function Header() {
                             <Nav.Link href="#action3">Contact</Nav.Link>
                         </Nav>
                         <Nav className="me-2">
-                            <Nav.Link href="#" className="text-danger fs-5 fw-bold">10</Nav.Link>
+                            <Nav.Link href="#" className="text-danger fs-5 fw-bold">{totalCart}</Nav.Link>
                             <Button onClick={() => handleShow(true)}>Cart</Button>
                         </Nav>
                         <Form className="d-flex">
@@ -49,7 +49,7 @@ function Header() {
             </Navbar>
 
             {/* CartModal */}
-            <Cart show={modalCart} handleClose={handleClose} items={[]} />
+            <Cart show={modalCart} handleClose={handleClose} handleDeleteCart={handleDeleteCart} handleChangeQty={handleChangeQty} />
         </>
     )
 }
