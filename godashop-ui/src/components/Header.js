@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Cart from './Cart';
-import products from '../services/Product';
+import products from '../services/product';
 
 let timeout = null;
 
@@ -19,6 +19,7 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
     const handleSearch = (e) => {
 
         if (e.target.value === '') {
+            console.log('data');
             setSearch([]);
             return;
         }
@@ -32,6 +33,10 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
             });
             setSearch(search);
         }, 500)
+
+    }
+
+    const handleSearchForm = () => {
 
     }
 
@@ -80,7 +85,7 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
                                         {
                                             search.map(item =>
                                                 <li className="mt-2">
-                                                    <img src={item.image} width={'20px'} />
+                                                    <img src={item.image} width={'20px'} alt={item.name} />
                                                     {item.name} - {item.price}
                                                 </li>
                                             )
@@ -89,7 +94,7 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
                                 </>
                             }
 
-                            <Button variant="outline-success">Search</Button>
+                            <Button variant="outline-success" onClick={handleSearchForm}>Search</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Container>
