@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import convertMoney from '../helper/util';
+import {convertMoney} from '../helper/util';
 
 function Product({ item, handleAddToCart }) {
     return (

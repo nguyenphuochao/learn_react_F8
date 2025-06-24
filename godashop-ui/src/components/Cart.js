@@ -2,7 +2,7 @@ import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
-import convertMoney from '../helper/util';
+import {convertMoney} from '../helper/util';
 
 function Cart({ show, handleClose, handleDeleteCart, handleChangeQty }) {
 

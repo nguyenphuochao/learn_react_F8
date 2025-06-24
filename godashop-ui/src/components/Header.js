@@ -1,15 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Cart from './Cart';
+import products from '../services/Product';
+
+let timeout = null;
 
 function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
     const [modalCart, setModalCart] = React.useState(false);
     const handleClose = () => setModalCart(false);
     const handleShow = () => setModalCart(true);
+
+    const [search, setSearch] = useState([]);
+
+    const handleSearch = (e) => {
+
+        if (e.target.value === '') {
+            setSearch([]);
+            return;
+        }
+
+        clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+            const search = products.filter((item) => {
+                const name = e.target.value.toLowerCase();
+                return item.name.toLocaleLowerCase().includes(name);
+            });
+            setSearch(search);
+        }, 500)
+
+    }
 
     return (
         <>
@@ -41,7 +65,30 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
+                                onKeyUp={(e) => handleSearch(e)}
                             />
+                            {search.length > 0 &&
+                                <>
+                                    <ul style={{
+                                        position: 'absolute',
+                                        top: '50px',
+                                        background: '#ede4e4',
+                                        width: '205px',
+                                        listStyle: 'none',
+                                        padding: '10px'
+                                    }}>
+                                        {
+                                            search.map(item =>
+                                                <li className="mt-2">
+                                                    <img src={item.image} width={'20px'} />
+                                                    {item.name} - {item.price}
+                                                </li>
+                                            )
+                                        }
+                                    </ul>
+                                </>
+                            }
+
                             <Button variant="outline-success">Search</Button>
                         </Form>
                     </Navbar.Collapse>
