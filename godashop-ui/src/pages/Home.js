@@ -1,3 +1,6 @@
+import React, { use, useState } from 'react'
+import Product from '../components/Product'
+
 const products = [
     {
         id: 1,
@@ -55,6 +58,56 @@ const products = [
         image: "https://cdn.tgdd.vn/Products/Images/42/334864/iphone-16e-white-thumb-600x600.jpg",
         desc: "Thông tin sản phẩm"
     }
-];
+]
 
-export default products;
+function Home() {
+
+    const handleAddToCart = (id) => {
+        let cart = [];
+
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+        }
+
+        // update qty cart
+        for (var i = 0; i < cart.length; i++) {
+            if (cart[i].id === id) {
+                cart[i].qty += 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                return;
+            }
+        }
+
+        // add new cart
+        const index = products.findIndex(product => product.id === id);
+
+        const objectProduct = {
+            id: products[index].id,
+            name: products[index].name,
+            price: products[index].price,
+            image: products[index].image,
+            qty: 1
+        }
+
+        cart.push(objectProduct);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    return (
+        <div className="container mt-2 mb-2">
+            <div className="row">
+                {
+                    products.map(product =>
+                        <div key={product.id} className="col-md-3 mt-4">
+                            <Product product={product} handleAddToCart={handleAddToCart} />
+                        </div>
+                    )
+                }
+
+            </div>
+        </div>
+    )
+}
+
+export default Home

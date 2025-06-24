@@ -10,6 +10,7 @@ import TwoWayBindingInput from "./TwoWayBindingInput";
 import TwoWayBindingRadio from "./TwoWayBindingRadio";
 import UpdateInfoWithUseState from "./UpdateInfoWithUseState";
 import UseCallbackHook from "./UseCallbackHook";
+import UseContextHook from "./UseContextHook";
 import UseEffectHook from "./UseEffectHook";
 import UseEffectWithDependencies from "./UseEffectWithDependencies";
 import UseEffectWithDomEvents from "./UseEffectWithDomEvents";
@@ -23,7 +24,7 @@ import UseRefHook from "./UseRefHook";
 
 const App = () => {
     return (
-        <TodoAppWithUseReducerHook />
+        <UseContextHook />
     )
 }
 
