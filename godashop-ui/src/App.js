@@ -3,71 +3,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Product from './components/Product';
 import { useEffect, useState } from 'react';
-
-// data from API
-const fakeData = [
-    {
-        id: 1,
-        name: "iPhone X",
-        price: 2500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/329149/iphone-16-pro-max-sa-mac-thumb-1-600x600.jpg",
-        desc: "Thông tin sản phẩm"
-    },
-    {
-        id: 2,
-        name: "iPhone 11",
-        price: 3500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/329143/iphone-16-pro-titan-trang.png",
-        desc: "Thông tin sản phẩm"
-    },
-    {
-        id: 3,
-        name: "iPhone 12",
-        price: 4500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/329135/iphone-16-pink-600x600.png",
-        desc: "Thông tin sản phẩm"
-    },
-    {
-        id: 4,
-        name: "iPhone 13",
-        price: 5500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/240259/iPhone-14-plus-thumb-xanh-600x600.jpg",
-        desc: "Thông tin sản phẩm"
-    },
-    {
-        id: 5,
-        name: "iPhone 14",
-        price: 6500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/303891/iphone-15-plus-vang-126gb-thumb-600x600.jpg",
-        desc: "Thông tin sản phẩm"
-    },
-    {
-        id: 6,
-        name: "iPhone 15",
-        price: 7500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/213031/iphone-12-xanh-la-new-2-600x600.jpg",
-        desc: "Thông tin sản phẩm"
-    },
-    {
-        id: 7,
-        name: "iPhone 16",
-        price: 8500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/213031/iphone-12-xanh-la-new-2-600x600.jpg",
-        desc: "Thông tin sản phẩm"
-    },
-    {
-        id: 8,
-        name: "iPhone 17",
-        price: 9500000,
-        image: "https://cdn.tgdd.vn/Products/Images/42/334864/iphone-16e-white-thumb-600x600.jpg",
-        desc: "Thông tin sản phẩm"
-    }
-];
+import products from './services/product';
 
 function App() {
 
     const [totalCart, setTotalCart] = useState(0);
     const [qty, setQty] = useState(1);
+    const [items, setItems] = useState(products);
 
     let cart = [];
 
@@ -83,10 +25,10 @@ function App() {
             }
         }
 
-        const index = fakeData.findIndex(item => item.id === id);
+        const index = products.findIndex(item => item.id === id);
 
         const object = {
-            ...fakeData[index],
+            ...products[index],
             qty: 1
         };
 
@@ -123,6 +65,15 @@ function App() {
         setTotalCart(total);
     }
 
+    // Ham search
+    const handleSearchForm = (search) => {
+        if(search !== '') {
+            const products = products.filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
+            // setItems(products);
+            console.log(products);
+        }
+    }
+
     useEffect(() => {
         cartTotal();
         // eslint-disable-next-line
@@ -130,13 +81,13 @@ function App() {
 
     return (
         <>
-            <Header totalCart={totalCart} handleDeleteCart={handleDeleteCart} handleChangeQty={handleChangeQty} />
+            <Header totalCart={totalCart} handleDeleteCart={handleDeleteCart} handleChangeQty={handleChangeQty} handleSearchForm={handleSearchForm} />
 
             <div className="container mt-2 mb-2">
                 <div className="row">
 
                     {
-                        fakeData.map(item =>
+                        products.map(item =>
                             <div key={item.id} className="col-md-3 mt-4">
                                 <Product item={item} handleAddToCart={handleAddToCart} />
                             </div>

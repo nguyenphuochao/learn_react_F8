@@ -9,12 +9,13 @@ import products from '../services/product';
 
 let timeout = null;
 
-function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
+function Header({ totalCart, handleDeleteCart, handleChangeQty, handleSearchForm }) {
     const [modalCart, setModalCart] = React.useState(false);
     const handleClose = () => setModalCart(false);
     const handleShow = () => setModalCart(true);
 
-    const [search, setSearch] = useState([]);
+    const [searchItems, setSearchItems] = useState([]);
+    const [search, setSearch] = useState('');
 
     const handleSearch = (e) => {
 
@@ -31,12 +32,8 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
                 const name = e.target.value.toLowerCase();
                 return item.name.toLocaleLowerCase().includes(name);
             });
-            setSearch(search);
+            setSearchItems(search);
         }, 500)
-
-    }
-
-    const handleSearchForm = () => {
 
     }
 
@@ -71,8 +68,9 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
                                 className="me-2"
                                 aria-label="Search"
                                 onKeyUp={(e) => handleSearch(e)}
+                                onChange={e => setSearch(e.target.value)}
                             />
-                            {search.length > 0 &&
+                            {searchItems.length > 0 &&
                                 <>
                                     <ul style={{
                                         position: 'absolute',
@@ -83,7 +81,7 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
                                         padding: '10px'
                                     }}>
                                         {
-                                            search.map(item =>
+                                            searchItems.map(item =>
                                                 <li className="mt-2">
                                                     <img src={item.image} width={'20px'} alt={item.name} />
                                                     {item.name} - {item.price}
@@ -94,7 +92,7 @@ function Header({ totalCart, handleDeleteCart, handleChangeQty }) {
                                 </>
                             }
 
-                            <Button variant="outline-success" onClick={handleSearchForm}>Search</Button>
+                            <Button variant="outline-success" onClick={() => handleSearchForm(search)}>Search</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Container>
