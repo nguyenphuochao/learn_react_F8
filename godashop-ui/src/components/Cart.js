@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
@@ -8,12 +8,35 @@ import { convertMoney } from '../helper/util';
 function Cart() {
     const context = useContext(CartContext);
 
-    const cart = JSON.parse(localStorage.getItem('cart'));
-
+    // Xóa cart
     const handleDeleteCart = (id) => {
-        const index = cart.findIndex(item => item.id === id);
-        cart.splice(index, 1);
-        localStorage.setItem('cart', JSON.stringify(cart));
+        const newCartItems = context.cartItems.filter(item => item.id !== id);
+        localStorage.setItem('cart', JSON.stringify(newCartItems));
+        const totalCart = newCartItems.reduce((total, product) => total + product.qty, 0);
+        context.setCartItems(newCartItems);
+        context.setTotalCart(totalCart)
+        context.setTotal(() => {
+            const total = newCartItems.reduce((total, product) => total + product.price * product.qty, 0);
+            return total;
+        })
+    }
+
+    // Cập nhật số lượng cart
+    const handleQtyChange = (e, id) => {
+        const newQty = e.target.value;
+        e.target.value = newQty;
+
+        const index = context.cartItems.findIndex(item => item.id === id);
+        context.cartItems[index].qty = newQty;
+
+        localStorage.setItem('cart', JSON.stringify(context.cartItems));
+
+        const totalCart = context.cartItems.reduce((total, product) => total + Number(product.qty), 0);
+        context.setTotalCart(totalCart)
+        context.setTotal(() => {
+            const total = context.cartItems.reduce((total, product) => total + product.price * product.qty, 0);
+            return total;
+        })
     }
 
     return (
@@ -36,13 +59,15 @@ function Cart() {
                         </tr>
                     </thead>
                     <tbody>
-                        { cart &&
-                            cart.map(item => (
+                        {context.cartItems &&
+                            context.cartItems.map(item => (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td><img src={item.image} alt="" width={50} /></td>
                                     <td>{item.name}</td>
-                                    <td>{item.qty}</td>
+                                    <td>
+                                        <input type="number" min={1} defaultValue={item.qty} onChange={(e) => handleQtyChange(e, item.id)} />
+                                    </td>
                                     <td>{convertMoney(item.price)}</td>
                                     <td>{convertMoney(Number(item.price) * Number(item.qty))}</td>
                                     <td>
@@ -54,7 +79,7 @@ function Cart() {
 
                         <tr>
                             <td colSpan={6}>Total : </td>
-                            <td className="text-danger fw-bold fs-5">10000</td>
+                            <td className="text-danger fw-bold fs-5">{convertMoney(context.total)}</td>
                         </tr>
 
                     </tbody>

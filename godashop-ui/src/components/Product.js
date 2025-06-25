@@ -5,7 +5,7 @@ import { convertMoney } from '../helper/util';
 
 function Product({ product, handleAddToCart }) {
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card>
             <Card.Img variant="top" src={product.image} />
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
