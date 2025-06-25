@@ -3,6 +3,7 @@ import { createContext, useState } from 'react'
 const CartContext = createContext();
 
 function CartProvider({ children }) {
+    // Xử lí popup cart
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

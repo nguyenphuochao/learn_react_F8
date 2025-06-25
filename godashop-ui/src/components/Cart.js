@@ -59,7 +59,7 @@ function Cart() {
                         </tr>
                     </thead>
                     <tbody>
-                        {context.cartItems &&
+                        {context.cartItems.length > 0 &&
                             context.cartItems.map(item => (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
