@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import Product from '../components/Product'
 import { CartContext } from '../context/CartContext';
 import products from '../services/products';
 
 function Home() {
-    const [goToTop, setGoToTop] = useState(false);
-
     const context = useContext(CartContext);
 
     const handleAddToCart = (id) => {
@@ -51,18 +49,6 @@ function Home() {
         })
     }
 
-    useEffect(() => {
-        function handleScroll() {
-            setGoToTop(window.scrollY > 200);
-        }
-
-        window.addEventListener('scroll', handleScroll)
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll)
-        }
-    }, [])
-
     return (
         <div className="mt-2 mb-4">
             <div className="row">
@@ -76,12 +62,6 @@ function Home() {
 
             </div>
 
-            <button style={{
-                position: 'fixed',
-                bottom: '20px',
-                right: '20px',
-                display: goToTop ? 'block' : 'none'
-            }}>Go to top</button>
         </div>
     )
 }
