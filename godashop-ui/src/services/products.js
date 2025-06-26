@@ -54,6 +54,27 @@ const products = [
         price: 9000000,
         image: "https://cdn.tgdd.vn/Products/Images/42/334864/iphone-16e-white-thumb-600x600.jpg",
         desc: "Thông tin sản phẩm"
+    },
+    {
+        id: 9,
+        name: "Samsung Galaxy S25 Edge 5G",
+        price: 10000000,
+        image: "https://cdn.tgdd.vn/Products/Images/42/335925/TimerThumb/samsung-galaxy-s25-edge-5g-(8).jpg",
+        desc: "Thông tin sản phẩm"
+    },
+    {
+        id: 10,
+        name: "Xiaomi Redmi 13x 6GB/128GB",
+        price: 11000000,
+        image: "https://cdn.tgdd.vn/Products/Images/42/335755/TimerThumb/xiaomi-redmi-13x-6gb-128gb-(40).jpg",
+        desc: "Thông tin sản phẩm"
+    },
+    {
+        id: 11,
+        name: "Samsung Galaxy A05",
+        price: 7000000,
+        image: "https://cdn.tgdd.vn/Products/Images/42/335234/TimerThumb/samsung-galaxy-a06-5g-6gb-128gb-(8).jpg",
+        desc: "Thông tin sản phẩm"
     }
 ]
 

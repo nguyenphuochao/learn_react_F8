@@ -15,6 +15,7 @@ let timeout = null;
 function Header() {
     const context = useContext(CartContext);
     const [searchItems, setSearchItems] = useState([]);
+    const [search, setSearch] = useState('');
 
     const handleSearch = (e) => {
         clearTimeout(timeout);
@@ -25,6 +26,13 @@ function Header() {
             var newProducts = products.filter(product => product.name.toLowerCase().includes(e.target.value.toLowerCase()));
             setSearchItems(newProducts);
         }, 500)
+    }
+
+    const handleSubmitSearch = (e) => {
+        e.preventDefault();
+        const searchItems = products.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
+        setSearchItems(searchItems);
+        console.log(search);
     }
 
     return (
@@ -50,13 +58,14 @@ function Header() {
                             <Nav.Link href="#" className="text-danger fs-5 fw-bold">{context.totalCart}</Nav.Link>
                             <Button onClick={context.handleShow}>Cart</Button>
                         </Nav>
-                        <Form className="d-flex">
+                        <Form className="d-flex" onSubmit={(e) => handleSubmitSearch(e)}>
                             <Form.Control
-                                type="search"
+                                type="text"
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
                                 onKeyUp={(e) => handleSearch(e)}
+                                onChange={(e) => setSearch(e.target.value)}
                             />
                             {
                                 searchItems.length > 0 &&
@@ -81,7 +90,7 @@ function Header() {
                                 </>
                             }
 
-                            <Button variant="outline-success">Search</Button>
+                            <Button type="submit" variant="outline-success">Search</Button>
                         </Form>
                     </Navbar.Collapse>
                 </Container>

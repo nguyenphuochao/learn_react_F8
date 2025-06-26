@@ -60,9 +60,9 @@ function Cart() {
                     </thead>
                     <tbody>
                         {context.cartItems.length > 0 &&
-                            context.cartItems.map(item => (
+                            context.cartItems.map((item, index) => (
                                 <tr key={item.id}>
-                                    <td>{item.id}</td>
+                                    <td>{index + 1}</td>
                                     <td><img src={item.image} alt="" width={50} /></td>
                                     <td>{item.name}</td>
                                     <td>
