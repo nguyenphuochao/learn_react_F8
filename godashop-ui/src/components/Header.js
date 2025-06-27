@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cart from './Cart';
 import { CartContext } from '../context/CartContext';
 import { convertMoney } from '../helper/util';
@@ -13,6 +13,7 @@ import products from '../services/products';
 let timeout = null;
 
 function Header() {
+    const navigate = useNavigate();
     const context = useContext(CartContext);
     const [searchItems, setSearchItems] = useState([]);
     const [search, setSearch] = useState('');
@@ -31,8 +32,8 @@ function Header() {
     const handleSubmitSearch = (e) => {
         e.preventDefault();
         const searchItems = products.filter(product => product.name.toLowerCase().includes(search.toLowerCase()));
-        setSearchItems(searchItems);
-        console.log(search);
+        context.setSearchItems(searchItems);
+        navigate('/search');
     }
 
     return (

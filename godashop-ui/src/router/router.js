@@ -1,10 +1,11 @@
 import React from 'react'
 import { Routes, Route } from "react-router-dom";
+import Layout from '../components/Layout';
+
+import NoPage from '../pages/NoPage';
 import Home from '../pages/Home';
 import News from '../pages/News';
 import Contact from '../pages/Contact';
-import NoPage from '../pages/NoPage';
-import Layout from '../components/Layout';
 
 function Router() {
     return (

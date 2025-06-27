@@ -26,6 +26,10 @@ function CartProvider({ children }) {
         return cart.reduce((total, product) => total + product.price * product.qty, 0);
     });
 
+    const [searchItems, setSearchItems] = useState([]);
+
+    console.log(searchItems);
+
     const value = {
         show,
         handleClose,
@@ -35,7 +39,9 @@ function CartProvider({ children }) {
         cartItems,
         setCartItems,
         total,
-        setTotal
+        setTotal,
+        searchItems,
+        setSearchItems
     }
 
     return (
